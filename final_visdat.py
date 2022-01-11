@@ -15,19 +15,19 @@ import numpy as np
 df = pd.read_csv('imdb_top_1000.csv')
 
 # display dataset head
-#df.head()
+df.head()
 
 # count dataset columns and rows
-# print("Columns: ", df.shape[1])
-# print("Rows: ", df.shape[0])
+print("Columns: ", df.shape[1])
+print("Rows: ", df.shape[0])
 
 # display dataset general info
-# df.info()
+df.info()
 
 # define a more compact version of previous dataset
 df2 = df[['Series_Title', 'Released_Year', 'Genre', 'IMDB_Rating', 'No_of_Votes']]
 df2['Released_Year'] = df2['Released_Year'].astype(int)
-# df2
+df2
 
 # convert and scale object attribute to integer
 from sklearn.preprocessing import LabelEncoder
@@ -77,7 +77,7 @@ fig.circle(x = source.data['Released_Year'],
 
 # define method for selecting movies
 def select_title():
-    #print('Selecting Title...')
+    print('Selecting Title...')
     selected = df2[
         (df2.Released_Year >= min_year.value) &
         (df2.Released_Year <= max_year.value) &
@@ -85,12 +85,12 @@ def select_title():
     ]
     if (genre.value != "All"):
         selected = selected[selected.Genre.str.contains(genre.value)==True]
-    #print('Title:', selected)
+    print('Title:', selected)
     return selected
 
 # define method as a callback for widgets
 def update_plot(attr, old, new):
-    #print('update')
+    print('update')
     df3 = select_title()
 
     source.data = dict(
